@@ -55,7 +55,7 @@ jobs:
           channel: '#general'
           text: |
             Dev: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME completed succesfully. Check the current development state at:
-            https://iotcloudcf.isus.emc.com/
+            https://iotcloud.cf.isus.emc.com/
       on_failure:
         put: slack_msg
         params:
