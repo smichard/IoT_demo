@@ -36,7 +36,7 @@ jobs:
       - get: app_sources
         trigger: true
       - task: unit
-        file: app_sources_dev/ci/tasks/unit.yml
+        file: app_sources/ci/tasks/unit.yml
 
   - name: deploy-app
     public: true
