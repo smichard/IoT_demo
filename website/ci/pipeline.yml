@@ -1,0 +1,65 @@
+resource_types:
+- name: slack_notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
+resources:
+- name: app_sources
+  type: git
+  source:
+    uri:
+    branch: master
+  check_every: 10s
+
+- name: cloud_foundry
+  type: cf
+  source:
+    api: {{cf_api}}
+    username: {{cf_user}}
+    password: {{cf_password}}
+    organization: {{cf_org}}
+    space: {{cf_space}}
+    skip_cert_check: false
+
+- name: slack_msg
+  type: slack_notification
+  source:
+    url: {{slack_hook}}
+
+jobs:
+  - name: test-app
+    public: true
+    serial: true
+    plan:
+      - get: app_sources
+        trigger: true
+      - task: unit
+        file: app_sources_dev/ci/tasks/unit.yml
+
+  - name: deploy-app
+    public: true
+    serial: true
+    plan:
+    - get: app_sources
+      passed: [ test-app ]
+      trigger: true
+    - put: cloud_foundry
+      params:
+        path: app_sources/website/
+        manifest: app_sources/website/manifest.yml
+      on_success:
+        put: slack_msg
+        params:
+          channel: '#general'
+          text: |
+            Dev: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME completed succesfully. Check the current development state at:
+            https://iotcloudcf.isus.emc.com/
+      on_failure:
+        put: slack_msg
+        params:
+          channel: '#general'
+          text: |
+            Dev: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME failed. Check it out at:
+            http://127.0.0.1:8080/builds/$BUILD_ID
