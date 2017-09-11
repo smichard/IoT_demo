@@ -9,7 +9,7 @@ resources:
 - name: app_sources
   type: git
   source:
-    uri:
+    uri: https://github.com/smichard/IoT_demo.git
     branch: master
   check_every: 10s
 
