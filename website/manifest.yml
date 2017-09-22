@@ -1,7 +1,7 @@
 ---
 applications:
-- name: iotcloud
+- name: iotdemocloud
   memory: 64M
-  host: iotcloud
+  host: iotdemocloud
   buildpack: staticfile_buildpack
 

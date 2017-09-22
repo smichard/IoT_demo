@@ -31,10 +31,14 @@ resources:
 jobs:
   - name: test-app
     public: true
+
     serial: true
     plan:
       - get: app_sources
         trigger: true
+#      - get: bender
+#        version: every
+#        trigger: true
       - task: unit
         file: app_sources/website/ci/tasks/unit.yml
 
@@ -44,6 +48,7 @@ jobs:
     plan:
     - get: app_sources
       passed: [ test-app ]
+      version: every
       trigger: true
     - put: cloud_foundry
       params:
@@ -55,7 +60,7 @@ jobs:
           channel: '#general'
           text: |
             Dev: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME completed succesfully. Check the current development state at:
-            https://iotcloud.cf.isus.emc.com/
+            https://iotdemocloud.cfapps.io/
       on_failure:
         put: slack_msg
         params:
