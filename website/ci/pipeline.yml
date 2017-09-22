@@ -36,9 +36,6 @@ jobs:
     plan:
       - get: app_sources
         trigger: true
-#      - get: bender
-#        version: every
-#        trigger: true
       - task: unit
         file: app_sources/website/ci/tasks/unit.yml
 
@@ -67,4 +64,4 @@ jobs:
           channel: '#general'
           text: |
             Dev: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME failed. Check it out at:
-            http://127.0.0.1:8080/builds/$BUILD_ID
+            http://deploy.michard.de/builds/$BUILD_ID
