@@ -96,7 +96,7 @@ jobs:
       trigger: true
       passed: [ deploy-app ]
     - task: create-artifact
-      file: app_sources/ci/tasks/create_artifact.yml
+      file: app_sources/website/ci/tasks/create_artifact.yml
     - put: S3_target
       params:
         file: ./artifact/iot_website-*-*.tar.gz
@@ -113,21 +113,3 @@ jobs:
           trigger: false
         - put: version
           params: {bump: minor}
-
-  - name: minor
-    public: true
-    plan:
-      - aggregate:
-        - get: version
-          trigger: false
-        - put: version
-          params: {bump: minor}
-
-  - name: major
-    public: true
-    plan:
-      - aggregate:
-        - get: version
-          trigger: false
-        - put: version
-          params: {bump: major}
