@@ -76,14 +76,14 @@ jobs:
         params:
           channel: '#general'
           text: |
-            Dev: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME completed succesfully. Check the current development state at:
-            https://iotdemocloud.cfapps.io/
+            Prod: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME completed succesfully. Check the current development state at:
+            https://sensor-cloud.cfapps.io/
       on_failure:
         put: slack_msg
         params:
           channel: '#general'
           text: |
-            Dev: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME failed. Check it out at:
+            Prod: The build $BUILD_JOB_NAME with build ID $BUILD_ID for pipeline $BUILD_PIPELINE_NAME failed. Check it out at:
             http://deploy.michard.de/builds/$BUILD_ID
 
   - name: ecs-backup
