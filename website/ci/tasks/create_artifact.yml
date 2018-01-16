@@ -18,5 +18,5 @@ run:
     export CURRENT_TIMESTAMP=$(date +"%Y%m%d%H%S")
     export CURRENT_VERSION=$(cat version/version)
     # Creating sample package file with a file name containing the new version number
-    tar -zcvf iot_website-$CURRENT_TIMESTAMP-$CURRENT_VERSION.tar.gz app_sources
+    tar -zcvf iot_demo-$CURRENT_TIMESTAMP-$CURRENT_VERSION.tar.gz app_sources
     cp iot_website-$CURRENT_TIMESTAMP-$CURRENT_VERSION.tar.gz artifact

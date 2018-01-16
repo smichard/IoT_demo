@@ -44,7 +44,7 @@ resources:
   source:
     endpoint: {{s3_endpoint}}
     bucket: releases
-    regexp: release_history/iot_website-(.*)-(.*).tar.gz
+    regexp: release_history/iot_demo-(.*)-(.*).tar.gz
     access_key_id: {{s3_key}}
     secret_access_key: {{s3_secret}}
 
@@ -99,7 +99,7 @@ jobs:
       file: app_sources/website/ci/tasks/create_artifact.yml
     - put: S3_target
       params:
-        file: ./artifact/iot_website-*-*.tar.gz
+        file: ./artifact/iot_demo-*-*.tar.gz
         acl: public-read
 
   - name: bump-version-minor
