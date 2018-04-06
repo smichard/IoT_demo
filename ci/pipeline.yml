@@ -57,7 +57,7 @@ jobs:
       - get: app_sources
         trigger: true
       - task: unit
-        file: app_sources/website/ci/tasks/unit.yml
+        file: app_sources/ci/tasks/unit.yml
 
   - name: deploy-app
     public: true
@@ -96,7 +96,7 @@ jobs:
       trigger: true
       passed: [ deploy-app ]
     - task: create-artifact
-      file: app_sources/website/ci/tasks/create_artifact.yml
+      file: app_sources/ci/tasks/create_artifact.yml
     - put: ecs_target
       params:
         file: ./artifact/iot_demo-*-*.tar.gz
