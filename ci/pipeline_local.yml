@@ -9,7 +9,7 @@ resources:
 - name: app_sources
   type: git
   source:
-    uri: http://192.168.58.7:30080/root/cloud_foundry_demo.git
+    uri: http://127.0.0.1:30080/root/cloud_foundry_demo.git
     branch: master
   check_every: 10s
 
@@ -31,7 +31,7 @@ resources:
 - name: version
   type: semver
   source:
-    uri: http://192.168.58.7:30080/root/cloud_foundry_demo.git
+    uri: http://127.0.0.1:30080/root/cloud_foundry_demo.git
     branch: version
     username: root
     password: testtest
