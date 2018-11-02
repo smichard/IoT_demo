@@ -51,7 +51,6 @@ resources:
 jobs:
   - name: test-app
     public: true
-
     serial: true
     plan:
       - get: app_sources
