@@ -1,8 +1,10 @@
 ---
 applications:
-- name: sensor-cloud
+- name: cf-demo-sym
   memory: 64M
-  routes:
-  - route: sensor-cloud.cfapps.io
+  instances: 3
   buildpack: staticfile_buildpack
-  
+  random-route: true
+  env:
+   APP_VERSION: blue
+   FORCE_HTTPS: true
